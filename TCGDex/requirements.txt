@@ -1,0 +1,6 @@
+tcgdex-sdk==2.3.0
+apscheduler==3.11.3
+sqlalchemy==2.1.8
+sqlalchemy-orm==1.2.10
+
+pyhive[hive_pure_sasl]==0.7.0
