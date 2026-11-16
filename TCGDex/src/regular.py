@@ -1,3 +1,4 @@
+import asyncio
 import os
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -18,7 +19,7 @@ def job():
 
 
 
-def main(instant: bool):
+async def main(instant: bool = False):
     if instant:
         job()
         return
@@ -31,4 +32,4 @@ def main(instant: bool):
     scheduler.start()
 
 if __name__ == "__main__":
-    main(True)
+    asyncio.run(main(True))
