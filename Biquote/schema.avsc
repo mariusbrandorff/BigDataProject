@@ -1,0 +1,28 @@
+{
+	"type": "record",
+	"name": "Tick",
+	"fields": [
+		{ "name": "symbol", "type": "string" },
+		{ "name": "bid", "type": "double" },
+		{ "name": "ask", "type": "double" },
+		{ "name": "last", "type": "double" },
+		{ "name": "volume", "type": "int" },
+		{
+			"name": "timestamp",
+			"type": { "type": "long", "logicalType": "timestamp-millis" }
+		},
+		{ "name": "source", "type": "string" },
+		{ "name": "high", "type": "double" },
+		{ "name": "low", "type": "double" },
+		{ "name": "direction", "type": "string" },
+		{ "name": "dayDiffPercent", "type": "double" },
+		{ "name": "description", "type": "string" },
+		{
+			"name": "time",
+			"type": { "type": "long", "logicalType": "timestamp-millis" }
+		},
+		{ "name": "exchange", "type": "string" },
+		{ "name": "spread", "type": "double" },
+		{ "name": "mid", "type": "double" }
+	]
+}
