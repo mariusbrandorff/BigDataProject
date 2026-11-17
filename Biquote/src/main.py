@@ -6,33 +6,35 @@ import logging
 from signalrcore.aio.aio_hub_connection_builder import AIOHubConnectionBuilder
 from signalrcore.transport.base_transport import TransportState
 
+from biquotehandler import BiquoteHandler
+from envdefault import EnvDefault
+
 
 # Don't touch, I will do this :)
 
 async def main():
     parser = ArgumentParser()
-    parser.add_argument("-b", "--bootstrap-server", type=str, default="localhost:9092")
-
-    conn = AIOHubConnectionBuilder()\
-        .with_url("https://biquote.io/hubs/tick")\
-        .configure_logging(logging.DEBUG)\
-        .build()
+    parser.add_argument("-b", "--bootstrap-server", dest="bootstrap", type=str, default="localhost:9092")
     
-    conn.on_open(lambda: print("connection opened and handshake received ready to send messages"))
-    conn.on_close(lambda: print("connection closed"))
-    conn.on_error(lambda e: print(e))
-    conn.on("ReceiveTick", print)
-    
-    await conn.start()
+    parser.add_argument(
+        "-i", "--in", dest="in_topic",
+        action=EnvDefault, envvar='IN_TOPIC',
+        help="Specify the in topic to process (can also be specified using IN_TOPIC environment variable)"
+    )
+    parser.add_argument(
+        "-o", "--out", dest="out_topic",
+        action=EnvDefault, envvar='OUT_TOPIC',
+        help="Specify the out topic to process (can also be specified using OUT_TOPIC environment variable)"
+    )
 
-    await conn.wait_until_state(TransportState.connected, timeout=10)
+    args = parser.parse_args()
 
-    symbols = ['EURUSD']
-    await conn.send("Subscribe", [symbols])
+    handler = BiquoteHandler(args.in_topic, args.out_topic, args.bootstrap)
 
+    await handler.start()
 
-    await asyncio.sleep(30)
-    await conn.stop()
+    while handler.is_running:
+        await asyncio.sleep(10)
 
 
 

@@ -1,4 +1,4 @@
-signalrcore==1.9.2
+signalrcore==1.1.0
 
 sqlalchemy==2.1.8
 sqlalchemy-orm==1.2.10

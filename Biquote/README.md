@@ -1,6 +1,6 @@
 # Requirements
 Listen to kafka topic, when receiving anything, react to this.
- - Fetch the new (potentially historical data)
+ - Fetch the new stock (potentially historical data)
 
 Listen to websocket to continuously get data of ticks.
 
@@ -9,6 +9,7 @@ Listen to websocket to continuously get data of ticks.
 
 
 ### Stream
+
 
 ## To run
 to run this locally, you can't be using minikube or a kubernetes cluster.
