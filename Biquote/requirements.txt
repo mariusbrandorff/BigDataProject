@@ -1,0 +1,7 @@
+signalrcore==1.9.2
+
+sqlalchemy==2.1.8
+sqlalchemy-orm==1.2.10
+kafka-python==3.0.13
+
+pyhive[hive_pure_sasl]==0.7.0
