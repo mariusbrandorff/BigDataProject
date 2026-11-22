@@ -3,5 +3,7 @@ apscheduler==3.11.3
 sqlalchemy==2.1.8
 sqlalchemy-orm==1.2.10
 kafka-python==3.0.13
+avro==1.12.2
+
 
 pyhive[hive_pure_sasl]==0.7.0

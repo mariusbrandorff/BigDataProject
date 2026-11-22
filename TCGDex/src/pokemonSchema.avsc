@@ -1,0 +1,34 @@
+{
+    "namespace": "pokemoncard.avro",
+    "type": "record",
+    "name": "pokemoncard",
+    "fields": [
+        {"name": "id", "type": "string"},
+        {"name": "name", "type": "string"},
+        {"name": "serie", "type": ["null", "string"], "default": null},
+        {"name": "set", "type": ["null", "string"], "default": null},
+        {"name": "price", "type": ["null", "float"], "default": null},
+        {
+            "name": "observed_at", "type": { "type": "long", "logicalType": "timestamp-millis" }, "default": null},
+        {
+            "name": "variants",
+            "type": [
+                "null",
+                {
+                    "type": "record",
+                    "name": "Variants",
+                    "fields": [
+                        {"name": "normal", "type": ["null", "boolean"], "default": null},
+                        {"name": "reverse", "type": ["null", "boolean"], "default": null},
+                        {"name": "holo", "type": ["null", "boolean"], "default": null},
+                        {"name": "firstEdition", "type": ["null", "boolean"], "default": null},
+                        {"name": "wPromo", "type": ["null", "boolean"], "default": null}
+                    ]
+                }
+            ],
+            "default": null
+        }
+    ],
+    "default": null
+}
+
