@@ -39,6 +39,6 @@ def to_avro_skin(skin: Skin):
         if value.tzinfo is None:
             value = value.replace(tzinfo=timezone.utc)
         
-        data[field] = int(value.timestamp() * 1000)  # milliseconds
+        data[field] = value
 
     return data

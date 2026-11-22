@@ -15,11 +15,8 @@ COPY --from=builder /__pycache__/main.cpython-314.pyc ./main.pyc
 COPY ./requirements.txt ./
 RUN pip install -r requirements.txt
 
-
 ENV SCHEDULE="* * * * *"
-ENV TOPIC_LISTEN="new_card"
-ENV TOPIC_SHOUT="tcg"
-
-
+ENV TOPIC_LISTEN="new_skin"
+ENV TOPIC_SHOUT="openskin"
 
 ENTRYPOINT [ "python", "main.pyc" ]
