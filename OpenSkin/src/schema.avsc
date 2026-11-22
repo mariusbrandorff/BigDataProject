@@ -1,0 +1,28 @@
+{
+	"type": "record",
+	"name": "Skin",
+	"fields": [
+		{ "name": "item", "type": "string" },
+		{ "name": "icon_url", "type": "string" },
+		{ "name": "prices", "type": "string" },
+		{ "name": "links", "type": {
+			"type": "map",
+			"values": "string"
+			}
+		},
+		{ "name": "lowest_ask", "type": {
+			"type": "record",
+			"name": "lowest_ask",
+			"fields": [
+					{ "name": "marketplace", "type": "string"},
+					{ "name": "price", "type": "double"}
+				]
+			}	
+		},
+		{ "name": "updated_at", "type": {
+			"type": "long",
+			"logicalType": "timestamp-millis"
+			}
+		}
+	]
+}

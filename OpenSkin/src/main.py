@@ -1,15 +1,17 @@
-import requests
-from models import json_to_skin, to_avro_skin
+from openskin import get_skins
+from models import to_avro_skin
 
-URL = "https://api.openskin.dev/v1/prices"
-skin_name = "AK-47 | Crane Flight (Field-Tested)"
+skin_names = [
+    "AK-47 | Crane Flight (Field-Tested)",
+    "Glock-18 | Umbral Rabbit (Factory New)"
+]
 
-# tester - laver en request
-response = requests.get(URL, params={"item": skin_name})
+skins = get_skins(skin_names)
+skins_data = [to_avro_skin(skin) for skin in skins]
 
-response_json = response.json()
-skin = json_to_skin(response_json)
+print("Number of skins retrieved:", len(skins_data))
 
-skin_data = to_avro_skin(skin)
 
-print("Skin data:", skin_data)
+for skin in skins_data:
+    print("Skin:" + skin["item"])
+    print("Lowest Ask:", skin["lowest_ask"])

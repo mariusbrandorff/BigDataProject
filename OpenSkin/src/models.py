@@ -1,5 +1,6 @@
+import json
 from dataclasses import asdict, dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 @dataclass
@@ -29,4 +30,15 @@ def json_to_skin(js: dict[str, Any]) -> Skin:
     
 def to_avro_skin(skin: Skin):
     data = asdict(skin)
+
+    data["prices"] = json.dumps(data["prices"])
+
+    for field in ("updated_at",):
+        value = data[field]
+        
+        if value.tzinfo is None:
+            value = value.replace(tzinfo=timezone.utc)
+        
+        data[field] = int(value.timestamp() * 1000)  # milliseconds
+
     return data
