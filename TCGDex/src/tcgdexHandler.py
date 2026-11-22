@@ -7,6 +7,7 @@ import threading
 from dotenv import load_dotenv
 
 import avro
+import avro.io
 import avro.schema
 from datetime import datetime, timezone
 
@@ -28,7 +29,7 @@ class TCGDexHandler:
 
         
 
-        ## Kafka consumer and producer
+    ## Kafka consumer and producer
     @property
     def kafka_consumer(self) -> KafkaConsumer:
         return KafkaConsumer(self.in_topic, bootstrap_servers=self.bootstrap_servers)
@@ -92,10 +93,10 @@ class TCGDexHandler:
         url = f"https://api.tcgdex.net/v2/en/cards/{card_id}"
 
         response = httpx.get(url, timeout=10)
-        response.raise_for_status()
+        response.raise_for_status() # Håndter error ellers crasher den
 
         data = response.json()
-
+    
         pricing = data.get("pricing") or {}
         cardmarket = pricing.get("cardmarket") or {}
         return cardmarket.get("trend")
