@@ -10,7 +10,12 @@ from envdefault import EnvDefault
 async def main():
     parser = ArgumentParser()
     parser.add_argument(
-        "-b", "--bootstrap-server", dest="bootstrap", type=str, default="localhost:9092"
+        "-b",
+        "--bootstrap-server",
+        dest="bootstrap_server",
+        action=EnvDefault,
+        envvar="BOOTSTRAP_SERVER",
+        help="Specify the bootstrap server for kafka (can also be specified using BOOTSTRAP_SERVER environment variable)"
     )
 
     parser.add_argument(
@@ -32,7 +37,7 @@ async def main():
 
     args = parser.parse_args()
 
-    handler = BiquoteHandler(args.in_topic, args.out_topic, args.bootstrap)
+    handler = BiquoteHandler(args.in_topic, args.out_topic, args.bootstrap_server)
 
     await handler.start()
     while handler.is_running:
