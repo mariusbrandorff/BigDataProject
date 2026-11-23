@@ -40,7 +40,11 @@ class Logs(Log):
                     if self._stop.is_set():
                         break
                     if isinstance(msg.value, bytes):
-                        text = msg.value.decode("utf-8")
+                        text: str
+                        try:
+                            text = msg.value.decode("utf-8")
+                        except:
+                            text = str(msg.value)
                         self.app.call_from_thread(self.write_line, text)
         finally:
             consumer.close()
