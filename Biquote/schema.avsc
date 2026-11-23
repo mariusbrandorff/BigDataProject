@@ -21,7 +21,7 @@
 			"name": "time",
 			"type": { "type": "long", "logicalType": "timestamp-millis" }
 		},
-		{ "name": "exchange", "type": "string" },
+		{ "name": "exchange", "type": ["null", "string"], "default": null },
 		{ "name": "spread", "type": "double" },
 		{ "name": "mid", "type": "double" }
 	]

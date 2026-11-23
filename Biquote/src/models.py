@@ -18,7 +18,7 @@ class Tick:
     dayDiffPercent: float
     description: str
     time: datetime
-    exchange: str
+    exchange: str | None
     spread: float
     mid: float
 
