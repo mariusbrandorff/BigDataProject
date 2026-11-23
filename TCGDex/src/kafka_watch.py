@@ -5,6 +5,7 @@ from kafka import KafkaConsumer
 from kafka.consumer.fetcher import ConsumerRecord
 
 from envdefault import EnvDefault
+from tcgdexHandler import TCGDexHandler
 
 # Default needs
 
@@ -21,28 +22,11 @@ def parse(parser: ArgumentParser):
     )
 
 async def main(in_topic: str, out_topic: str, bootstrap_servers: str):
-    print(f"In: '{in_topic}'\nOut: '{out_topic}'")
+    handler = TCGDexHandler(in_topic, out_topic, bootstrap_servers)
+    handler.start()
 
-    # Create topic if it doesn't exist
-
-    consumer = KafkaConsumer(
-        in_topic,
-        bootstrap_servers=bootstrap_servers,
-    )
-
-    print("partitions:", consumer.partitions_for_topic(in_topic))
-    print("assignment:", consumer.assignment())
-    
-    msg: ConsumerRecord
-    for msg in consumer:
-        if not isinstance(msg, ConsumerRecord):
-            print("Something wrong!?")
-            return
-        
-        print(msg.topic, msg.partition, msg.offset, msg.value)
-
-    print("Timed out with no records")
-
+    while handler.is_running:
+        await asyncio.sleep(10) # 10s
 
 # ?
 
