@@ -1,0 +1,2 @@
+kafka-python==3.0.13
+textual==8.2.8

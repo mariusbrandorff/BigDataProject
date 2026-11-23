@@ -146,3 +146,5 @@ class PokemonCardInfo(base):
             pricing=data.get("pricing"),
             updated=datetime.fromisoformat(updated) if updated else None,
         )
+
+    
